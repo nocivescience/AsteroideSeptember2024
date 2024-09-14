@@ -5,8 +5,9 @@
 body{
     margin: 0;
     display: flex;
+    flex-direction: column-reverse;
     justify-content: center;
-    background: url('../asteroidWithStone/fondo.jpg');
+    background: url('./fondo.jpg');
     background-size: cover;
 }
 canvas{
@@ -19,5 +20,54 @@ canvas{
 }
 header{
     font-family: 'Roboto Mono', monospace;
+}
+.controles{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.controles div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
 
+ /* Estilos para navegadores basados en WebKit (Chrome, Safari, Edge) */
+ input[type=range] {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 10px;
+    background: red;
+    border-radius: 0; /* Elimina bordes redondeados */
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 10px;
+    background: black; /* Color del indicador */
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    background: red; /* Fondo del rango en rojo */
+}
+
+/* Estilos para Firefox */
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 10px;
+    background: black; /* Color del indicador */
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+input[type=range]::-moz-range-track {
+    background: red; /* Fondo del rango en rojo */
+    height: 10px;
 }

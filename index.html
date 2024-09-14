@@ -15,7 +15,16 @@
     <div style="display: flex; justify-content: center;">
         <canvas id="gameCanvas" width="760" height="570"  class="rounded mt-4"></canvas>
     </div>
+    <div class="controles">
+        <div class="control-volumen">
+            <label for="volumen" class="volumen">Volumen</label>
+            <input type="range" name="volumen" id="volumen" min="0" max="1" value="0.5" step="0.1">
+        </div>
+    </div>
     <script>
+        // controles
+        const volumenElement = document.getElementById('volumen');
+        // Asteroids game
         const FPS = 30; // frames per second
         const FRICTION = 0.7; // friction coefficient of space (0 = no friction, 1 = lots of friction)
         const ROID_JAG = 0.4; // jaggedness of the asteroids (0 = none, 1 = lots)
@@ -79,6 +88,11 @@
         document.addEventListener("keydown", keyDown);
         document.addEventListener("keyup", keyUp);
 
+        volumenElement.addEventListener('keyDown',(e)=>{
+            if(e.key==='ArrowLeft' || e.key==='ArrowRight'){
+                e.preventDefault();
+            }
+        })
         // set up the game loop
         setInterval(update, 1000 / FPS);
 
@@ -316,15 +330,16 @@
             this.play = function() {
                 this.soundLow.play();
             }
-
-
+            
+            
             this.setAsteroidRatio = function(ratio) {
                 this.tempo = 1.0 - 0.75 * (1.0 - ratio);
             }
-
+            
             this.tick = function() {
                 if (this.beatTime == 0) {
                     this.play();
+                    this.soundLow.volume = parseFloat(volumenElement.value);  // #### Aca se controla el volumen ####
                     this.beatTime = Math.ceil(this.tempo * FPS);
                 } else {
                     this.beatTime--;
@@ -344,6 +359,7 @@
                 if (SOUND_ON) {
                     this.streamNum = (this.streamNum + 1) % maxStreams;
                     this.streams[this.streamNum].play();
+
                 }
             }
 
